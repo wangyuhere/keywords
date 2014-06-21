@@ -3,6 +3,8 @@ Keywords
 
 [![Build Status](https://travis-ci.org/wangyuhere/keywords.svg?branch=master)](https://travis-ci.org/wangyuhere/keywords)
 
+[![Code Climate](https://codeclimate.com/github/wangyuhere/keywords.png)](https://codeclimate.com/github/wangyuhere/keywords)
+
 Contributing
 --
 
