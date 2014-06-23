@@ -26,7 +26,8 @@ class Article < ActiveRecord::Base
   def index!
     transaction do
       Occurrence.where(article_id: id).delete_all
-      indexer.tokens.each { |t| words << Word.where(name: t).first_or_create }
+      word_ids = Word.find_or_create_ids(indexer.tokens)
+      Occurrence.massive_insert_by_article(self, word_ids)
       self.indexed_at = Time.now
       save!
       self
