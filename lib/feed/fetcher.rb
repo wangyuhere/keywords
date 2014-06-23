@@ -27,7 +27,7 @@ module Feed
     end
 
     def new_entries_since(time)
-      entries.select {|e| time.nil? || e.published > time}
+      entries.select {|e| time.nil? || (e.published && e.published > time) }
     end
   end
 end
