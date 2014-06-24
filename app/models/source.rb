@@ -3,8 +3,8 @@ require 'feed/fetcher'
 class Source < ActiveRecord::Base
   attr_accessor :fetcher
 
-  has_many :articles
-  has_many :occurrences
+  has_many :articles, dependent: :delete_all
+  has_many :occurrences, dependent: :delete_all
   has_many :words, through: :occurrences
 
   def self.from_feed(feed_url)

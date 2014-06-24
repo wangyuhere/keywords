@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :source
 
-  has_many :occurrences
+  has_many :occurrences, dependent: :delete_all
   has_many :words, through: :occurrences
 
   scope :empty, -> { where(body: '') }
