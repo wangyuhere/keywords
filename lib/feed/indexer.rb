@@ -7,7 +7,7 @@ module Feed
     end
 
     def tokens
-      @tokens ||= text.split(/[^\p{L}]+/).reject(&:empty?).map(&:downcase)
+      @tokens ||= text.split(/[^\p{L}]+/).reject{|w| w.length < 2}.map(&:downcase)
     end
   end
 end
