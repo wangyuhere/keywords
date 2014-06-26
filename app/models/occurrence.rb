@@ -1,5 +1,5 @@
 class Occurrence < ActiveRecord::Base
-  belongs_to :word
+  belongs_to :word, counter_cache: true
   belongs_to :article
   belongs_to :source
 
