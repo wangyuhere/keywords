@@ -41,4 +41,8 @@ class Article < ActiveRecord::Base
   def indexer
     @indexer ||= Feed::Indexer.new(text)
   end
+
+  def to_s
+    "<Article id:#{id}, url:#{url}>"
+  end
 end
