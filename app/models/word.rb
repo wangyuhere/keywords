@@ -3,6 +3,12 @@ class Word < ActiveRecord::Base
   has_many :articles, through: :occurrences
   has_many :sources, through: :occurrences
 
+  def self.update_all_occurrences_count
+    Word.find_each do |w|
+      Word.update_counters w.id, occurrences_count: w.occurrences.count - w.occurrences_count
+    end
+  end
+
   # Return array of word ids of the names passed in
   # If word doesn't exist for a name, create the word.
   # Ids are returned as the same order of the names
@@ -21,5 +27,9 @@ class Word < ActiveRecord::Base
     now = Time.now.to_s
     values = names.map { |n| "('#{n}','#{now}','#{now}')" }
     Word.connection.execute "INSERT INTO words (name, created_at, updated_at) VALUES #{values.join(',')}"
+  end
+
+  def self.top_words(page=1, per=100)
+    order('occurrences_count desc').page(page).per(per)
   end
 end

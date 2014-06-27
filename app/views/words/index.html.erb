@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-4">
+    <%= paginate @words %>
+    <ul class="list-group">
+      <% @words.each do |word| %>
+        <li class="list-group-item">
+          <span class="badge"><%= word.occurrences_count %></span>
+          <%= word.name %>
+        </li>
+      <% end %>
+    </ul>
+    <%= paginate @words %>
+  </div>
+</div>
