@@ -1,6 +1,15 @@
 <div class="row">
-  <div class="col-md-4">
-    <%= paginate @words %>
+  <div class="col-md-8">
+    <span class="pull-left">
+      <%= paginate @words %>
+    </span>
+    <span class="pull-right pagination">
+      <%= page_entries_info @words %>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
     <ul class="list-group">
       <% @words.each do |word| %>
         <li class="list-group-item">
@@ -9,6 +18,15 @@
         </li>
       <% end %>
     </ul>
-    <%= paginate @words %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <span class="pull-left">
+      <%= paginate @words %>
+    </span>
+    <span class="pull-right pagination">
+      <%= page_entries_info @words %>
+    </span>
   </div>
 </div>
