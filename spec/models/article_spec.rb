@@ -39,10 +39,11 @@ RSpec.describe Article do
       expect(subject.indexed_at).not_to be_nil
     end
 
-    it 'updates word occurrences count' do
+    it 'updates counter cache in word' do
       subject.index!
       subject.occurrences.map do |o|
         expect(o.word.occurrences_count).to eql 1
+        expect(o.word.articles_count).to eql 1
       end
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626211210) do
+ActiveRecord::Schema.define(version: 20140628103043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,10 @@ ActiveRecord::Schema.define(version: 20140626211210) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "occurrences_count", default: 0
+    t.integer  "articles_count",    default: 0
   end
 
+  add_index "words", ["articles_count"], name: "index_words_on_articles_count", using: :btree
   add_index "words", ["name"], name: "index_words_on_name", unique: true, using: :btree
   add_index "words", ["occurrences_count"], name: "index_words_on_occurrences_count", using: :btree
 
