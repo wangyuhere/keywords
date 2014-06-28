@@ -14,6 +14,10 @@ class Source < ActiveRecord::Base
     source.update_feed!
   end
 
+  def name
+    title[/\w+/]
+  end
+
   def fetch!
     return if feed_url.nil?
     return unless fetcher.is_modified_since?(last_modified_at)

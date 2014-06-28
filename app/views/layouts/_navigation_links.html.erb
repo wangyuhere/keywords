@@ -1,1 +1,9 @@
-<%# add navigation links to this file %>
+<li class="<%= 'active' if controller_name == 'words' %>">
+  <%= link_to 'Words', words_path %>
+</li>
+<li class="<%= 'active' if controller_name == 'articles' %>">
+  <%= link_to 'Articles', articles_path  %>
+</li>
+<li class="<%= 'active' if controller_name == 'trends' %>">
+  <%= link_to 'Trends', '#' %>
+</li>

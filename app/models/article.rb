@@ -9,9 +9,10 @@ class Article < ActiveRecord::Base
   has_many :occurrences, dependent: :delete_all
   has_many :words, through: :occurrences
 
-  scope :empty, -> { where(body: '') }
   scope :newly, -> { where(body: nil) }
   scope :ready_to_index, -> { where("indexed_at is NULL AND body is not NULL AND body != ''") }
+
+  delegate :name, to: :source, prefix: 'source'
 
   def text
     "#{title} #{body}"
