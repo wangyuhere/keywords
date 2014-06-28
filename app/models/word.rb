@@ -1,7 +1,7 @@
 class Word < ActiveRecord::Base
   has_many :occurrences, dependent: :delete_all
-  has_many :articles, through: :occurrences
-  has_many :sources, through: :occurrences
+  has_many :articles, -> { uniq }, through: :occurrences
+  has_many :sources, -> { uniq }, through: :occurrences
 
   def self.update_all_occurrences_count
     Word.find_each do |w|
