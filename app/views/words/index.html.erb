@@ -1,3 +1,4 @@
+<h1>Words by Occurrences</h1>
 <div class="row">
   <div class="col-md-8">
     <span class="pull-left">
@@ -14,7 +15,7 @@
       <% @words.each do |word| %>
         <li class="list-group-item">
           <span class="badge"><%= word.occurrences_count %></span>
-          <%= word.name %>
+          <%= link_to word.name, word_path(word) %>
         </li>
       <% end %>
     </ul>
