@@ -1,2 +1,15 @@
 <h1><%= @word.name %></h1>
 <p>Occurs <%= @word.occurrences_count %> times in <%= @word.articles_count %> articles. (<%= @word.occurrences_per_article %> times per article)</p>
+<div class="row">
+  <div class="col-md-12">
+    <%= paginate @word.articles %>
+    <ul class="list-group">
+      <% @word.articles.each do |article| %>
+      <li class="list-group-item">
+        <%= link_to article.title, article_path(article, word: @word.name) %>
+      </li>
+      <% end %>
+    </ul>
+    <%= paginate @word.articles %>
+  </div>
+</div>

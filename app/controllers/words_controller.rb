@@ -5,6 +5,7 @@ class WordsController < ApplicationController
   end
 
   def show
-    @word = WordPresenter.new Word.find(params[:id])
+    page = params[:page] || 1
+    @word = WordPresenter.new Word.find(params[:id]), page
   end
 end
