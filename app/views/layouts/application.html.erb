@@ -6,6 +6,8 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Keywords" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://momentjs.com/downloads/moment.js"></script>
     <%= csrf_meta_tags %>
   </head>
   <body>

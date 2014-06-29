@@ -1,0 +1,25 @@
+<h1>Statistics</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Counts</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3">Uniq Words:</div>
+          <div class="col-md-3"><%= @stats.uniq_words_count %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Articles:</div>
+          <div class="col-md-3"><%= @stats.articles_count %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Total Words:</div>
+          <div class="col-md-3"><%= @stats.total_words_count %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
