@@ -29,7 +29,9 @@ class Word < ActiveRecord::Base
     Word.connection.execute "INSERT INTO words (name, created_at, updated_at) VALUES #{values.join(',')}"
   end
 
-  def self.top_words(page=1, per=100)
-    order('occurrences_count desc').page(page).per(per)
+  def self.top_words(search, page=1, per=100)
+    query = order('occurrences_count desc')
+    query = query.where('name like ?', search+'%') if search.present?
+    query.page(page).per(per)
   end
 end

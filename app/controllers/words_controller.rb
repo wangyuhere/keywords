@@ -1,7 +1,8 @@
 class WordsController < ApplicationController
   def index
     page = params[:page] || 1
-    @words = Word.top_words page
+    search = params[:search] || ''
+    @words = Word.top_words search, page
   end
 
   def show
