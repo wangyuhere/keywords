@@ -1,7 +1,7 @@
-<h1><%= @article.title %></h1>
+<h1><%= highlight_word @article.title, @word %></h1>
 <p>Published at: <%= @article.published_at %></p>
 <p>
-  <%= highlight_word(@article.body, @word) %>
+  <%= highlight_word @article.body, @word %>
 </p>
 <p>
   Source: <%= link_to @article.url, @article.url, target: '_blank' %>
