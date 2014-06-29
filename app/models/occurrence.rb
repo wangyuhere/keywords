@@ -20,9 +20,13 @@ class Occurrence < ActiveRecord::Base
   private
 
   def self.update_counters(article, word_ids)
-    word_ids.group_by(&:to_i).map{|k,v|[k,v.length]}.group_by(&:last).each do |count, ids|
+    group_by_count(word_ids).each do |count, ids|
       Word.update_counters ids.map(&:first), occurrences_count: count
     end
     Word.update_counters word_ids.uniq, articles_count: 1
+  end
+
+  def self.group_by_count(ids)
+    ids.group_by(&:to_i).map{|k,v|[k,v.length]}.group_by(&:last)
   end
 end
