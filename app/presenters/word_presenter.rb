@@ -22,7 +22,7 @@ class WordPresenter
   private
 
   def articles_with_pagination
-    ids = Occurrence.select(:article_id).where(word_id: word.id).uniq.order('article_id desc').offset((@page-1)*ARTICLES_PER_PAGE).limit(ARTICLES_PER_PAGE).map &:article_id
+    ids = Occurrence.select(:article_id).where(word_id: word.id).uniq.order('article_id desc').page(@page).per(ARTICLES_PER_PAGE).map &:article_id
     Kaminari.paginate_array(Article.where(id: ids).order('published_at desc').to_a, total_count: articles_count).page(@page).per(ARTICLES_PER_PAGE)
   end
 end
