@@ -14,9 +14,11 @@
     <ul class="list-group">
       <% @words.each do |word| %>
         <li class="list-group-item">
-          <span class="badge"><%= word.occurrences_count %></span>
           <%= link_to word.name, word_path(word) %>
-          <%= link_to 'trends', trends_path(word_id: word.id) %>
+          <a class="stat-trends" href="<%= trends_path(word_id: word.id) %>">
+            <span class="glyphicon glyphicon-stats"></span>
+            <span class="badge"><%= word.occurrences_count %></span>
+          </a>
         </li>
       <% end %>
     </ul>
