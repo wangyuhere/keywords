@@ -8,7 +8,7 @@ $(document).on 'page:change', ->
   trends = $chart.data('trends')
   word = $chart.data('word')
 
-  for i in [1...30]
+  for i in [1..30]
     strDate = curDate.format('YYYY-MM-DD')
     categories.push curDate.format('MM-DD')
     if trends[strDate]

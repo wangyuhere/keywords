@@ -20,7 +20,7 @@ class TrendsPresenter
   private
 
   def occurrences_count_last_30_days
-    range = (30.days.ago)..Date.yesterday
+    range = (30.days.ago.beginning_of_day)..(Date.yesterday.end_of_day)
     word.occurrences.joins(:article).group("date(articles.published_at)").where("articles.published_at #{range.to_s(:db)}").order('date(articles.published_at)').count
   end
 end
