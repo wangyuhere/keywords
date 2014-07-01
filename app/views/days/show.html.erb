@@ -1,0 +1,8 @@
+<h1>Day - <%= params[:date] %></h1>
+<ul>
+  <% @words.each do |word| %>
+  <li>
+    <%= link_to word.name, word_path(word) %>
+  </li>
+  <% end %>
+</ul>

@@ -1,0 +1,8 @@
+<h1>Days</h1>
+<ul>
+  <% @date_range.each do |date| %>
+  <li>
+    <%= link_to date, day_path(date: date) %>
+  </li>
+  <% end %>
+</ul>

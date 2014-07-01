@@ -34,4 +34,11 @@ class Word < ActiveRecord::Base
     query = query.where('name like ?', search+'%') if search.present?
     query.page(page).per(per)
   end
+
+  def self.words_of_day(date=Date.yesterday, limit=30)
+    range = (date.beginning_of_day)..(date.end_of_day)
+    words = Occurrence.select('word_id, count(*) as count').joins(:article).where("articles.published_at #{range.to_s(:db)}").group(:word_id).order('count desc').limit(1000)
+    ids = words.map(&:word_id) - Word.order('occurrences_count desc').limit(1000).pluck(:id)
+    Word.where(id:ids).order('occurrences_count desc').limit(limit/2) + Word.where(id:ids).order('occurrences_count').limit(limit/2)
+  end
 end
