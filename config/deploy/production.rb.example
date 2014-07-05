@@ -1,0 +1,1 @@
+server 'example.com', port: 1234, user: 'user', roles: %w{web app}

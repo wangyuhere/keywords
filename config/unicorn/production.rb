@@ -1,6 +1,6 @@
 worker_processes 2
 
-working_directory "/home/keywords/current" # available in 0.94.0+
+working_directory "/home/keywords/current"
 
 listen "/home/keywords/current/tmp/sockets/keywords.socket", :backlog => 64
 listen "127.0.0.1:8080", :tcp_nopush => true
