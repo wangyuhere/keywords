@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  username: <%= `whoami`.strip %>
+  host: localhost
+
+development:
+  <<: *default
+  database: keywords_dev
+
+test:
+  <<: *default
+  database: keywords_test
+
+production:
+  <<: *default
+  database: keywords
