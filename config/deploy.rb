@@ -17,6 +17,8 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set :log_level, :info
 set :keep_releases, 5
 
+set :whenever_roles, [:web, :app]
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do

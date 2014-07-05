@@ -17,6 +17,7 @@ gem 'unicorn-rails'
 gem 'nokogiri'
 gem 'feedjira'
 gem 'kaminari'
+gem 'whenever', require: false
 group :development do
   gem 'capistrano', '~> 3.2.0'
   gem 'capistrano-rails', '~> 1.1'
