@@ -27,7 +27,7 @@ namespace :keywords do
   end
 
   desc 'fetch and index'
-  task all: [:fetch, :index] do
+  task import: [:fetch, :index] do
     puts "Imported at #{Time.now}"
   end
 end
