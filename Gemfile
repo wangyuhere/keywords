@@ -17,6 +17,7 @@ gem 'unicorn-rails'
 gem 'nokogiri'
 gem 'feedjira'
 gem 'kaminari'
+gem 'treat'
 gem 'whenever', require: false
 group :development do
   gem 'capistrano', '~> 3.2.0'
@@ -43,5 +44,4 @@ group :test do
   gem 'webmock'
   gem 'faker'
   gem 'launchy'
-  gem 'selenium-webdriver'
 end
