@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :words, only: [:index, :show]
   resources :articles, only: [:index, :show]
   get :statistics, to: 'statistics#index'
