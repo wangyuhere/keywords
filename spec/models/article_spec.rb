@@ -6,7 +6,7 @@ RSpec.describe Article do
 
   describe '#text' do
     it 'returns title and body' do
-      expect(subject.text).to eq "#{subject.title} #{subject.body}"
+      expect(subject.text).to eq "#{subject.title}: #{subject.body}"
     end
   end
 

@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
   delegate :name, to: :source, prefix: 'source'
 
   def text
-    "#{title} #{body}"
+    "#{title}: #{body}"
   end
 
   def parse!
