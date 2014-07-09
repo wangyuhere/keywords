@@ -21,6 +21,8 @@ before_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
 
+  defined?(Redis.current) and Redis.current.quit
+
   old_pid = "#{server.config[:pid]}.oldbin"
   if old_pid != server.pid
     begin
@@ -34,4 +36,6 @@ end
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
+
+  defined?(Redis.current) and Redis.current.client.reconnect
 end
