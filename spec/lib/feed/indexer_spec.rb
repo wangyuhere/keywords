@@ -15,18 +15,4 @@ RSpec.describe Feed::Indexer do
       expect(described_class.new('Hello WORLD').tokens).to eql ['hello', 'world']
     end
   end
-
-  describe '#phrases' do
-    it 'returns phrases of 2 by default' do
-      expect(described_class.new('hello world. good example').phrases).to eql ['hello world', 'good example']
-    end
-
-    it 'returns all phrases' do
-      expect(described_class.new('how are you').phrases).to eql ['how are', 'are you']
-    end
-
-    it 'returns phrases of gram specified' do
-      expect(described_class.new('HOW are you').phrases(3)).to eql ['how are you']
-    end
-  end
 end
