@@ -11,6 +11,7 @@ class Article < ActiveRecord::Base
 
   scope :newly, -> { where(body: nil) }
   scope :ready_to_index, -> { where("indexed_at is NULL AND body is not NULL AND body != ''") }
+  scope :indexed, -> { where("indexed_at is NOT NULL") }
 
   delegate :name, to: :source, prefix: 'source'
 
