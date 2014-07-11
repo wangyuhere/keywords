@@ -30,4 +30,28 @@ namespace :keywords do
   task import: [:fetch, :index] do
     puts "Imported at #{Time.now}"
   end
+
+  desc 'count phrases'
+  task count_phrases: :environment do
+    require 'analyze/phrases'
+    gram = (ENV['GRAM'] || 2).to_i
+    key = "count_phrases_#{gram}_last_article_id"
+    redis = Redis.current
+    last_article_id = redis.get(key) || 0
+
+    Article.indexed.where("id > ?", last_article_id).order('id asc').find_each do |a|
+      redis.multi do
+        Analyze::Phrases.new(a.text, gram).count!
+        redis.set key, a.id
+        puts "Counted article #{a.id}!"
+      end
+    end
+  end
+
+  desc 'rank phrases'
+  task rank_phrases: :environment do
+    require 'analyze/phrases_rank'
+    gram = (ENV['GRAM'] || 2).to_i
+    Analyze::PhrasesRank.new(gram).run
+  end
 end

@@ -1,5 +1,8 @@
+require 'analyze/phrases_key'
+
 module Analyze
   class Phrases
+    include ::WithRedis, PhrasesKey
 
     attr_reader :text, :gram
 
@@ -8,8 +11,8 @@ module Analyze
       @gram = gram
     end
 
-    def calculate!
-      to_a.each { |p| Redis.current.zincrby key, 1, p }
+    def count!
+      phrases_count.each { |phrase, count| redis.zincrby count_key, count, phrase }
     end
 
     def to_a
@@ -22,8 +25,8 @@ module Analyze
 
     private
 
-    def key
-      "count_phrases_#{gram}"
+    def phrases_count
+      to_a.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }
     end
 
     def sub_sentences
