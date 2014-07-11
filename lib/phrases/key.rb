@@ -1,5 +1,5 @@
-module Analyze
-  module PhrasesKey
+module Phrases
+  module Key
     def count_key
       @count_key ||= "count_phrases_#{gram}"
     end

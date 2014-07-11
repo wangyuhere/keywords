@@ -1,8 +1,8 @@
-require 'analyze/phrases_key'
+require 'phrases/key'
 
-module Analyze
-  class Phrases
-    include ::WithRedis, PhrasesKey
+module Phrases
+  class Count
+    include ::WithRedis, Key
 
     attr_reader :text, :gram
 
@@ -11,7 +11,7 @@ module Analyze
       @gram = gram
     end
 
-    def count!
+    def run
       phrases_count.each { |phrase, count| redis.zincrby count_key, count, phrase }
     end
 

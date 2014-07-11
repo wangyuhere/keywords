@@ -1,8 +1,8 @@
-require 'analyze/phrases_key'
+require 'phrases/key'
 
-module Analyze
-  class PhrasesRank
-    include ::WithRedis, PhrasesKey
+module Phrases
+  class Rank
+    include ::WithRedis, Key
 
     MIN_PHRASES_COUNT = 10
 

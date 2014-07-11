@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'analyze/phrases'
+require 'phrases/count'
 
-RSpec.describe Analyze::Phrases do
+RSpec.describe Phrases::Count do
   describe '#to_a' do
     it 'returns phrases of 2 by default' do
       expect(described_class.new('hello world. good example').to_a).to eql ['hello world', 'good example']
