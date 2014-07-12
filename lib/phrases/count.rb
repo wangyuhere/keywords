@@ -16,11 +16,7 @@ module Phrases
     end
 
     def to_a
-      @all_phrases = sub_sentences.map do |s|
-        words = s.split(/[^\p{L}]+/).reject(&:empty?).map(&:downcase)
-        next if words.length < gram
-        (0..(words.length - gram)).map { |i| gram.times.map { |n| words[n+i] }.join(' ') }
-      end.compact.flatten
+      @all_phrases ||= sub_sentences.map { |sentence| phrases_from sentence }.compact.flatten
     end
 
     private
@@ -31,6 +27,16 @@ module Phrases
 
     def sub_sentences
       text.split /[.,;:?!]+\s+/
+    end
+
+    def phrases_from(sentence)
+      words = sentence.split(/[^\p{L}]+/).reject(&:empty?).map(&:downcase)
+      return if words.length < gram
+      phrases_by_gram words
+    end
+
+    def phrases_by_gram(words)
+      (0..(words.length - gram)).map { |i| gram.times.map { |n| words[n+i] }.join(' ') }
     end
   end
 end
