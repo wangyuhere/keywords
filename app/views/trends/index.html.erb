@@ -2,4 +2,13 @@
 
 <% if @trends.has_word? %>
   <div id="chart" data-word="<%= @trends.word.name %>" data-trends="<%= @trends.data.to_json %>"></div>
+<% else %>
+  <p>Choose a word:</p>
+  <ul>
+    <% @trends.latest_words.each do |word| %>
+    <li>
+      <%= link_to word.name, trends_path(word_id: word.id) %>
+    </li>
+    <% end %>
+  </ul>
 <% end %>

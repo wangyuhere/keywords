@@ -17,6 +17,10 @@ class TrendsPresenter
     @data ||= occurrences_count_last_30_days
   end
 
+  def latest_words
+    @latest_words ||= Word.order('updated_at desc').limit(20)
+  end
+
   private
 
   def occurrences_count_last_30_days
