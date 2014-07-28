@@ -19,15 +19,18 @@ class Source < ActiveRecord::Base
   end
 
   def fetch!
-    return if feed_url.nil?
-    return unless fetcher.is_modified_since?(last_modified_at)
+    count = 0
+    return count if feed_url.nil?
+    return count unless fetcher.is_modified_since?(last_modified_at)
     transaction do
       fetcher.new_entries_since(last_modified_at).each do |e|
         articles.where(url: e.url).first_or_create(title: e.title, published_at: e.published)
+        count += 1
       end
       self.last_modified_at = fetcher.last_modified_at
       save!
     end
+    count
   end
 
   def fetcher

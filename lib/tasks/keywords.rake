@@ -2,11 +2,12 @@ namespace :keywords do
   desc 'fetch articles from all sources'
   task fetch: :environment do
     count = 0
+    articles_count = 0
     Source.all.find_each do |s|
-      s.fetch!
+      articles_count += s.fetch!
       count += 1
     end
-    puts "Fetching from #{count} sources ..."
+    puts "Checked #{count} sources and #{articles_count} new articles are found. Fetching ..."
 
     count = 0
     Article.newly.find_each do |a|
