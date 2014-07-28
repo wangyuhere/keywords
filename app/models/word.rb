@@ -5,7 +5,7 @@ class Word < ActiveRecord::Base
 
   def self.update_all_occurrences_count
     Word.find_each do |w|
-      Word.update_counters w.id, occurrences_count: w.occurrences.count - w.occurrences_count
+      w.update_occurrences_count
     end
   end
 
@@ -40,5 +40,9 @@ class Word < ActiveRecord::Base
     words = Occurrence.select('word_id, count(*) as count').joins(:article).where("articles.published_at #{range.to_s(:db)}").group(:word_id).order('count desc').limit(1000)
     ids = words.map(&:word_id) - Word.order('occurrences_count desc').limit(1000).pluck(:id)
     Word.where(id:ids).order('occurrences_count desc').limit(limit/2) + Word.where(id:ids).order('occurrences_count').limit(limit/2)
+  end
+
+  def update_occurrences_count
+    Word.update_counters id, occurrences_count: occurrences.count - occurrences_count
   end
 end

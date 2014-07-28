@@ -21,4 +21,17 @@ RSpec.describe Word do
       expect(ids).to eql [c_id, b_id, c_id, a_id]
     end
   end
+
+  describe '#update_occurrences_count' do
+    let(:word) { create :word }
+
+    before do
+      create :occurrence, word: word
+      Word.update_counters word.id, occurrences_count: -1
+    end
+
+    it 'updates occurrences count' do
+      expect { word.update_occurrences_count }.to change {word.reload.occurrences_count}.by 1
+    end
+  end
 end
