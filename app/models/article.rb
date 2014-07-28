@@ -30,6 +30,7 @@ class Article < ActiveRecord::Base
       Occurrence.where(article_id: id).delete_all
       word_ids = Word.find_or_create_ids(indexer.tokens)
       Occurrence.massive_insert_by_article(self, word_ids)
+      update_counters
       self.indexed_at = Time.now
       save!
       self
@@ -46,5 +47,22 @@ class Article < ActiveRecord::Base
 
   def to_s
     "<Article id:#{id}, url:#{url}>"
+  end
+
+  private
+
+  def update_counters(is_added = true)
+    word_ids = occurrences.reload.map { |o| o.word_id }
+    return if word_ids.empty?
+
+    op = is_added ? 1 : -1
+    group_by_count(word_ids).each do |count, ids|
+      Word.update_counters ids.map(&:first), occurrences_count: count*op
+    end
+    Word.update_counters word_ids.uniq, articles_count: 1*op
+  end
+
+  def group_by_count(ids)
+    ids.group_by(&:to_i).map{|k,v|[k,v.length]}.group_by(&:last)
   end
 end
