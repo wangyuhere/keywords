@@ -27,7 +27,7 @@ class Article < ActiveRecord::Base
 
   def index!
     transaction do
-      Occurrence.where(article_id: id).delete_all
+      delete_all_occurrences
       word_ids = Word.find_or_create_ids(indexer.tokens)
       Occurrence.massive_insert_by_article(self, word_ids)
       update_counters
@@ -50,6 +50,11 @@ class Article < ActiveRecord::Base
   end
 
   private
+
+  def delete_all_occurrences
+    update_counters false
+    Occurrence.where(article_id: id).delete_all
+  end
 
   def update_counters(is_added = true)
     word_ids = occurrences.reload.map { |o| o.word_id }
