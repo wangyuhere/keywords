@@ -1,7 +1,7 @@
 class WordPresenter
   attr_reader :word
 
-  delegate :name, :occurrences_count, :articles_count, to: :word
+  delegate :id, :name, :occurrences_count, :articles_count, to: :word
 
   ARTICLES_PER_PAGE = 15
 

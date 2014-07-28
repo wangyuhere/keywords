@@ -1,5 +1,10 @@
 <h1><%= @word.name %></h1>
-<p>Occurs <%= @word.occurrences_count %> times in <%= @word.articles_count %> articles. (<%= @word.occurrences_per_article %> times per article)</p>
+<p>
+  Occurs <%= @word.occurrences_count %> times in <%= @word.articles_count %> articles. (<%= @word.occurrences_per_article %> times per article)
+  <a href="<%= trends_path(word_id: @word.id) %>">
+    <span class="glyphicon glyphicon-stats"></span>
+  </a>
+</p>
 <div class="row">
   <div class="col-md-12">
     <%= paginate @word.articles %>
