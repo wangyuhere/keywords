@@ -11,7 +11,7 @@ namespace :keywords do
 
     count = 0
     Article.newly.find_each do |a|
-      a.parse! rescue puts "#{a.to_s} can not be fetched!" and next
+      ArticleParser.new(a).parse! rescue puts "#{a.to_s} can not be fetched!" and next
       count += 1
     end
     puts "Fetched #{count} new articles!"
@@ -21,7 +21,7 @@ namespace :keywords do
   task index: :environment do
     count = 0
     Article.ready_to_index.find_each do |a|
-      a.index!
+      ArticleIndexer.new(a).index!
       count += 1
     end
     puts "Indexed #{count} articles!"
