@@ -8,5 +8,6 @@ class WordsController < ApplicationController
   def show
     page = params[:page] || 1
     @word = WordPresenter.new Word.find(params[:id]), page
+    fresh_when etag: [@word.word, @word.articles]
   end
 end
