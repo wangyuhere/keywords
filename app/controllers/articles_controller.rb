@@ -7,5 +7,6 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find params[:id]
     @word = params[:word]
+    fresh_when @article
   end
 end
